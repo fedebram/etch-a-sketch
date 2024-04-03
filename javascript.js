@@ -1,28 +1,51 @@
 const container = document.querySelector(".container");
 const body = document.querySelector("body");
 
+const button = document.createElement("button");
+button.textContent = "click to change the number of square";
+body.appendChild(button);
 
-for (let i = 0; i < 16; i++) {
-  let theDiv = document.createElement("div");
-  theDiv.setAttribute("class", "row");
-  container.appendChild(theDiv);
-  for (let j = 0; j < 16; j++) {
-    const square = document.createElement("div");
-    square.setAttribute("id", "square")
-    theDiv.appendChild(square);
-  }
-}
+createSquare(16);  //initial setting 16X16 square
 
-const square = document.querySelectorAll("#square");
-console.log(square);
-square.forEach(square => {
-  square.addEventListener("mouseenter", () => {
-    square.style.backgroundColor = randomColor();
+createColor();
+
+button.addEventListener("click", () => {
+  let numberSquare = parseInt(prompt("Insert a number between 1 and 100:"));
+  const row = document.querySelectorAll(".row");
+  row.forEach(row => {
+    row.remove();
   });
+  createSquare(numberSquare);
+  createColor();
 });
 
 
+function createSquare(numberSquare) {
+  for (let i = 0; i < numberSquare; i++) {
+    const row = document.createElement("div");
+    row.setAttribute("class", "row");
+    let relativeHeight = (400/numberSquare);
+    let relativeWidth = (400/numberSquare);
+    row.style.height = `${relativeHeight}px`;
+    container.appendChild(row);
+    for (let j = 0; j < numberSquare; j++) {
+      const square = document.createElement("div");
+      square.setAttribute("id", "square");
+      square.style.height = `${relativeHeight}px`;
+      square.style.width = `${relativeWidth}px`;
+      row.appendChild(square);
+    }
+  }
+}
 
+function createColor() {
+  const square = document.querySelectorAll("#square");
+  square.forEach(square => {
+    square.addEventListener("mouseenter", () => {
+      square.style.backgroundColor = randomColor();
+    });
+  });
+}
 
 function randomColor() {
   function random() {
