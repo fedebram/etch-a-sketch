@@ -1,5 +1,5 @@
-const container = document.querySelector(".container");
 const body = document.querySelector("body");
+const container = document.querySelector(".container");
 
 const button = document.createElement("button");
 button.textContent = "click to change the number of square";
@@ -24,15 +24,10 @@ function createSquare(numberSquare) {
   for (let i = 0; i < numberSquare; i++) {
     const row = document.createElement("div");
     row.setAttribute("class", "row");
-    let relativeHeight = (400/numberSquare);
-    let relativeWidth = (400/numberSquare);
-    row.style.height = `${relativeHeight}px`;
     container.appendChild(row);
     for (let j = 0; j < numberSquare; j++) {
       const square = document.createElement("div");
       square.setAttribute("id", "square");
-      square.style.height = `${relativeHeight}px`;
-      square.style.width = `${relativeWidth}px`;
       row.appendChild(square);
     }
   }
